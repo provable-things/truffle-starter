@@ -1,0 +1,29 @@
+{
+  "name": "playground-truffle-box",
+  "version": "1.0.0",
+  "description": "oraclize truffle box",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oraclize/playground-truffle-box.git"
+  },
+  "keywords": [
+    "truffle",
+    "truffle-box",
+    "box",
+    "oraclize",
+    "oracle"
+  ],
+  "author": "oraclize",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oraclize/playground-truffle-box/issues"
+  },
+  "homepage": "https://github.com/oraclize/playground-truffle-box#readme"
+}

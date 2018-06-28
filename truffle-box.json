@@ -1,0 +1,14 @@
+
+{
+    "ignore": [
+      "README.md",
+      ".gitignore",
+      ".gitattributes"
+    ],
+    "commands": {
+      "Compile": "truffle compile"
+    },
+    "hooks": {
+      "post-unpack": "npm install"
+    }
+  }
