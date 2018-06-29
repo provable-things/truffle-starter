@@ -1,13 +1,10 @@
 {
-  "name": "playground-truffle-box",
+  "name": "truffle-starter",
   "version": "1.0.0",
-  "description": "oraclize truffle box",
+  "description": "oraclize truffle-box",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
