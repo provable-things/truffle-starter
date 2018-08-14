@@ -14,7 +14,7 @@ The Oraclize Truffle box is here! We have created this starter-box to show you h
 
 **1)** Using your favourite shell, first install Truffle:
 
-_**`❍ npm install -g truffle@4.1.14"`**_
+_**`❍ npm install -g truffle@4.1.14`**_
 
 **2)** Then create a directory you want to install the box into:
 
