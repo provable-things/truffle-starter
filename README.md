@@ -10,7 +10,7 @@ The Oraclize Truffle box is here! We have created this starter-box to show you h
 
 &nbsp;
 
-## :page_with_curl: __Instructions For Use__
+### :page_with_curl: __Instructions For Use__
 
 **1)** Using your favourite shell, first install Truffle:
 
@@ -28,11 +28,7 @@ _**`❍ cd my-awesome-oraclize-truffle-box`**_
 
 _**`❍ truffle unbox oraclize/truffle-starter`**_
 
-**5)** And finally install the dependencies:
-
-_**`❍ npm install`**_
-
-Whilst the dependencies are installing, have a look around the your new Oraclize box. You'll see all the Truffle files & folder structure you're used to. Congratulations - you can now compile, migrate and deploy to your heart's content!
+Now is a great time to have a look around the your new Oraclize box. You'll see all the Truffle files & folder structure you're used to. Congratulations - you can now compile, migrate and deploy your contracts to your heart's content!
 
 &nbsp;
 
@@ -40,9 +36,9 @@ Whilst the dependencies are installing, have a look around the your new Oraclize
 
 &nbsp;
 
-## :mortar_board: __Running The Tests__
+### :mortar_board: __Running The Tests__
 
-When you installed the dependencies, you got another part of the Oraclize ecosystem that we call the __*[Ethereum-Bridge](https://github.com/oraclize/ethereum-bridge)*__. It allows you to test Oraclize functionality on local test-nets! Also, did you know that Truffle can spin up a local ethereum-blockchain itself in order to run tests? These two things combined are super useful when developing your smart-contracts, as a fast test-turnover incentivizes more thorough testing which is _always_ a good thing! 
+When you unboxed this, it installed the dependencies it needs including another part of the Oraclize ecosystem that we call the __*[Ethereum-Bridge](https://github.com/oraclize/ethereum-bridge)*__. It allows you to test Oraclize functionality on local test-nets! Also, did you know that Truffle can spin up a local ethereum-blockchain itself in order to run tests? These two things combined are super useful when developing your smart-contracts, as a fast test-turnover incentivizes more thorough testing which is _always_ a good thing! 
 
 To help even more, we've written a script inside the *`package.json`* that came inside your Truffle box - go and have a peek at it now. It'll start the bridge with the right settings which will make your development super easy and fast, watch:
 
@@ -58,7 +54,7 @@ _**`❍ npm run bridge`**_
 
 _**`❍ truffle develop> test`**_
 
-<!-- ## :fire: :boom: :fire: -->
+<!-- ### :fire: :boom: :fire: -->
 
 :white_check_mark: The 
 
@@ -82,7 +78,7 @@ Afer you've watched the tests run, go and have a look in the test directory to s
 
 &nbsp;
 
-## :computer: __Get Developing!__ 
+### :computer: __Get Developing!__ 
 
 With just this truffle-box you can quickly and easily being leveraging the full power of Oraclize in your smart-contracts - have fun! 
 
@@ -104,7 +100,7 @@ For more information or any questions you may have:
 
 &nbsp;
 
-## :mega: __Get In Touch!__
+### :mega: __Get In Touch!__
 
 If you want to tell us something, or ask us something, there's loads of ways to get in touch:
 

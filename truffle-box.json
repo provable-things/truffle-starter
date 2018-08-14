@@ -1,12 +1,11 @@
-
 {
   "ignore": [
-    "README.md",
     ".gitignore",
     ".gitattributes"
   ],
   "commands": {
-    "Compile": "truffle compile"
+    "Read the README :P": "vim README.md",
+    "Enter the truffle development console": "truffle develop"
   },
   "hooks": {
     "post-unpack": "npm install"
