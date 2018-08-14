@@ -10,6 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/oraclize/playground-truffle-box.git"
   },
+  "dependencies": {
+    "ethereum-bridge": "0.6.1"
+  },
+  "scripts": {
+    "bridge": "./node_modules/.bin/ethereum-bridge -a 9 -H 127.0.0.1 -p 9545 --dev"
+  },
   "keywords": [
     "truffle",
     "truffle-box",
