@@ -85,7 +85,7 @@ With just this truffle-box you can quickly and easily being leveraging the full 
 
 For more information or any questions you may have:
 
-:punch: Read the __*[Oraclize docs](docs.oraclize.it)*__!
+:punch: Read the __*[Oraclize docs](https://docs.oraclize.it/)*__!
 
 :punch: Read the __*[Truffle docs](https://truffleframework.com/docs)*__!
 
