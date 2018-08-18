@@ -54,21 +54,17 @@ _**`❍ npm run bridge`**_
 
 _**`❍ truffle develop> test`**_
 
+
+![Tests!!](oraclize-truffle-tests.jpg)
+
+
 <!-- ### :fire: :boom: :fire: -->
 
-:white_check_mark: The 
+:white_check_mark: The more green . . .
 
-:white_check_mark: more
+:white_check_mark: check marks . . .
 
-:white_check_mark: green
-
-:white_check_mark: check
-
-:white_check_mark: marks
-
-:white_check_mark: the
-
-:white_check_mark: better!
+:white_check_mark: the better!!
 
 Afer you've watched the tests run, go and have a look in the test directory to see the javascript file that contains them. Notice the *`waitForEvent`* function in the *`./test/utils.js`* folder too - it means we can wait for events to see what values Oraclize calls are returning! 
 
