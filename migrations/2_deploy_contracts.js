@@ -1,9 +1,8 @@
 const contracts = [
-  artifacts.require('./DieselPrice.sol'),
-  artifacts.require('./YoutubeViews.sol'),
-  artifacts.require('./usingOraclize.sol')
+  artifacts.require('./usingOraclize'),
+  artifacts.require('./DieselPrice.sol')
 ]
 
-module.exports = deployer => 
-  contracts.map(contract => 
+module.exports = deployer =>
+  contracts.map(contract =>
       deployer.deploy(contract))
