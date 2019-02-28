@@ -1,11 +1,8 @@
-const waitForEvent = _event => 
-  new Promise((resolve, reject) => 
-    _event.watch((err, res) =>
-      err ? reject(err) : (resolve(res), _event.stopWatching())))
-
-const PREFIX = "VM Exception while processing transaction: "
+const waitForEvent = (_event, _from = 0, _to = 'latest') =>
+  new Promise ((resolve,reject) =>
+    _event({fromBlock: _from, toBlock: _to}, (e, ev) =>
+      e ? reject(e) : resolve(ev)))
 
 module.exports = {
-  waitForEvent,
-  PREFIX
+  waitForEvent
 }
