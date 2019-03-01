@@ -1,2 +1,1 @@
-module.exports = deployer => 
-  deployer.deploy(artifacts.require("Migrations.sol"))
+module.exports = deployer => deployer.deploy(artifacts.require("Migrations.sol"))

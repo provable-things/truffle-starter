@@ -2,7 +2,7 @@
 
 &nbsp;
 
-The Oraclize Truffle box is here! We have created this starter-box to show you how to leverage Oraclize within the Truffle framework. It contains the Oraclize API as well as a couple of example smart-contracts. There are tests included too showing you how you might set up a full ethereum smart-contract development suite of your own. Get leveraging the power of Oraclize in your smart-contract projects today!
+The Oraclize Truffle box is here! We have created this starter-box to show you how to leverage Oraclize within the Truffle framework. It contains the Oraclize API as well as an example smart-contract. There are tests included too showing you how you could set up a full ethereum smart-contract development suite of your own. Get leveraging the power of Oraclize in your smart-contract projects today!
 
 &nbsp;
 
@@ -12,9 +12,9 @@ The Oraclize Truffle box is here! We have created this starter-box to show you h
 
 ### :page_with_curl: __Instructions For Unboxing__
 
-**1)** Using your favourite shell, first install Truffle:
+**1)** Using your favourite shell, first install Truffle globally:
 
-_**`❍ npm install -g truffle@4.1.14`**_
+_**`❍ npm install -g truffle`**_
 
 **2)** Then create a directory you want to install the box into:
 
