@@ -83,7 +83,7 @@ Afer you've watched the tests run, go and have a look in the test directory to s
 
 ### :computer: __Get Developing!__
 
-Now that you've seen the contents of the Provable box in action, you'll be itching to get on with your own projects. Just remember that if you're using Provable queries in your smart-contracts, you'll need the ethereum-bridge running _along side_ the truffle development console. The bridge is also highly configurable to suit the development environment & version of the ethereum blockchain you're using - you can find out __*[all of it's options here](https://github.com/provable/ethereum-bridge)*__.
+Now that you've seen the contents of the Provable box in action, you'll be itching to get on with your own projects. Just remember that if you're using Provable queries in your smart-contracts, you'll need the ethereum-bridge running _along side_ the truffle development console. The bridge is also highly configurable to suit the development environment & version of the ethereum blockchain you're using - you can find out __*[all of it's options here](https://github.com/provable-things/ethereum-bridge)*__.
 
 There are also tons of other resources to help you out, including:
 
