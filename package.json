@@ -1,18 +1,18 @@
 {
   "name": "truffle-starter",
-  "version": "1.0.0",
-  "description": "oraclize truffle-box",
+  "version": "1.1.0",
+  "description": "provable truffle-box",
   "main": "truffle-config.js",
   "directories": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oraclize/playground-truffle-box.git"
+    "url": "git+https://github.com/provable-things/truffle-starter.git"
   },
   "dependencies": {
     "ethereum-bridge": "0.6.1",
-    "web3": "1.0.0-beta.46"
+    "web3": "1.0.0-beta.36"
   },
   "scripts": {
     "bridge": "./node_modules/.bin/ethereum-bridge -a 9 -H 127.0.0.1 -p 9545 --dev"
@@ -21,13 +21,13 @@
     "truffle",
     "truffle-box",
     "box",
-    "oraclize",
+    "provable",
     "oracle"
   ],
-  "author": "oraclize",
+  "author": "provable",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/oraclize/playground-truffle-box/issues"
+    "url": "https://github.com/provable-things/truffle-starter/issues"
   },
-  "homepage": "https://github.com/oraclize/playground-truffle-box#readme"
+  "homepage": "https://github.com/provable-things/truffle-starter#readme"
 }
