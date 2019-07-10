@@ -3,50 +3,54 @@ const { waitForEvent } = require('./utils')
 const dieselPricesContract = artifacts.require('./DieselPrice.sol')
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:9545'))
 
-contract('Diesel Price Tests', accounts => {
+contract('Diesel Price Tests', ([ owner ]) => {
 
   let contractPrice
-  const gasAmt = 3e6
-  const address = accounts[0]
+  let contractEvents
+  let contractMethods
 
-  beforeEach(async () => (
-    { contract } = await dieselPricesContract.deployed(),
-    { methods, events } = new web3.eth.Contract(
+  const GAS_LIMIT = 3e6
+
+  it('Should get contract instantiation for listening to events', async () => {
+    const { contract } = await dieselPricesContract.deployed()
+    const { methods, events } = new web3.eth.Contract(
       contract._jsonInterface,
       contract._address
     )
-  ))
+    contractEvents = events
+    contractMethods = methods
+  })
 
-  it('Should have logged a new Oraclize query', async () => {
+  it('Should have logged a new Provable query', async () => {
     const {
       returnValues: {
-        description
+        _description
       }
-    } = await waitForEvent(events.LogNewOraclizeQuery)
+    } = await waitForEvent(contractEvents.LogNewProvableQuery)
 
     assert.strictEqual(
-      description,
-      'Oraclize query was sent, standing by for the answer...',
-      'Oraclize query incorrectly logged!'
+      _description,
+      'Provable query was sent, standing by for the answer...',
+      'Provable query incorrectly logged!'
     )
   })
 
   it('Callback should have logged a new diesel price', async () => {
     const {
       returnValues: {
-        price
+        _price
       }
-    } = await waitForEvent(events.LogNewDieselPrice)
-    contractPrice = price * 100
+    } = await waitForEvent(contractEvents.LogNewDieselPrice)
+    contractPrice = _price * 100
     assert.isAbove(
-      parseInt(price),
+      parseInt(_price),
       0,
-      'A price should have been retrieved from Oraclize call!'
+      'A price should have been retrieved from Provable call!'
     )
   })
 
   it('Should set diesel price correctly in contract', async () => {
-    const queriedPrice = await methods
+    const queriedPrice = await contractMethods
       .dieselPriceUSD()
       .call()
     assert.equal(
@@ -57,19 +61,19 @@ contract('Diesel Price Tests', accounts => {
   })
 
   it('Should revert on second query attempt due to lack of funds', async () => {
-    const expErr = 'revert'
+    const expectedError = 'revert'
     try {
-      await methods
-        .update()
+      await contractMethods
+        .fetchDieselPriveViaProvable()
         .send({
-          from: address,
-          gas: gasAmt
+          from: owner,
+          gas: GAS_LIMIT
         })
       assert.fail('Update transaction should not have succeeded!')
     } catch (e) {
       assert.isTrue(
-        e.message.includes(expErr),
-        `Expected ${expErr} but got ${e.message} instead!`
+        e.message.includes(expectedError),
+        `Expected ${expectedError} but got ${e.message} instead!`
       )
     }
   })
