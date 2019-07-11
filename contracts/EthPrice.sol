@@ -26,7 +26,11 @@ contract EthPrice is usingProvable {
         );
     }
 
-    function __callback(bytes32 _queryID, string memory _result)
+    function __callback(
+        bytes32 _queryID,
+        string memory _result,
+        bytes memory _proof
+    )
         public
     {
         require(msg.sender == provable_cbAddress());
