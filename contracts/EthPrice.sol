@@ -4,30 +4,33 @@ import "./provableAPI.sol";
 
 contract EthPrice is usingProvable {
 
-    uint public dieselPriceUSD;
+    uint256 public ethPriceCents;
 
-    event LogNewDieselPrice(string _price);
+    event LogNewEthPrice(uint256 _priceInCents);
     event LogNewProvableQuery(string _description);
 
     constructor()
         public
     {
-        fetchDieselPriveViaProvable();
+        fetchEthPriveViaProvable();
     }
 
     function __callback(bytes32 _queryID, string memory _result)
         public
     {
         require(msg.sender == provable_cbAddress());
-        emit LogNewDieselPrice(_result);
-        dieselPriceUSD = parseInt(_result, 2); // Let's save it as cents...
+        ethPriceCents = parseInt(_result, 2);
+        emit LogNewEthPrice(ethPriceCents);
     }
 
-    function fetchDieselPriveViaProvable()
+    function fetchEthPriveViaProvable()
         public
         payable
     {
-        emit LogNewProvableQuery("Provable query was sent, standing by for the answer...");
-        provable_query("URL", "xml(https://www.fueleconomy.gov/ws/rest/fuelprices).fuelPrices.diesel");
+        emit LogNewProvableQuery("Provable query in-flight!");
+        provable_query(
+            "URL",
+            "json(https://api.kraken.com/0/public/Ticker?pair=ETHUSD).result.XETHZUSD.c.0"
+        );
     }
 }
