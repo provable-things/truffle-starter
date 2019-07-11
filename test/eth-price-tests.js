@@ -1,9 +1,9 @@
 const Web3 = require('web3')
 const { waitForEvent } = require('./utils')
-const dieselPricesContract = artifacts.require('./DieselPrice.sol')
+const ethPriceContract = artifacts.require('./EthPrice.sol')
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:9545'))
 
-contract('Diesel Price Tests', ([ owner ]) => {
+contract('Eth Price Tests', ([ owner ]) => {
 
   let contractPrice
   let contractEvents
@@ -12,7 +12,7 @@ contract('Diesel Price Tests', ([ owner ]) => {
   const GAS_LIMIT = 3e6
 
   it('Should get contract instantiation for listening to events', async () => {
-    const { contract } = await dieselPricesContract.deployed()
+    const { contract } = await ethPriceContract.deployed()
     const { methods, events } = new web3.eth.Contract(
       contract._jsonInterface,
       contract._address

@@ -1,6 +1,6 @@
 const contracts = [
-  artifacts.require('./usingProvable'),
-  artifacts.require('./DieselPrice.sol')
+  artifacts.require('./EthPrice.sol'),
+  artifacts.require('./usingProvable')
 ]
 
 module.exports = deployer =>

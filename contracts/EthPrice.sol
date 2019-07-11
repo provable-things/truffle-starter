@@ -2,7 +2,7 @@ pragma solidity ^0.5.0;
 
 import "./provable/provableAPI_0.5.sol";
 
-contract DieselPrice is usingProvable {
+contract EthPrice is usingProvable {
 
     uint public dieselPriceUSD;
 
