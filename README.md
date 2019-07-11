@@ -56,15 +56,14 @@ _**`❍ truffle develop> test`**_
 
 
 ```
-  Contract: Diesel Price Tests
+  Contract: ETH Price Tests
     ✓ Should get contract instantiation for listening to events
-    ✓ Should have logged a new Provable query
-    ✓ Callback should have logged a new diesel price (4676ms)
-    ✓ Should set diesel price correctly in contract
+    ✓ Should have logged a new Provable query on contract creation
+    ✓ Callback should have logged a new ETH price (4676ms)
+    ✓ Should set ETH price correctly in contract
     ✓ Should revert on second query attempt due to lack of funds (120ms)
-
-
-  5 passing (6s)
+    ✓ Should succeed on a second query attempt when sending funds (97ms)
+   6 passing (6s)
 ```
 
 :white_check_mark: The more green . . .
