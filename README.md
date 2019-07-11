@@ -63,7 +63,7 @@ _**`❍ truffle develop> test`**_
     ✓ Should set ETH price correctly in contract
     ✓ Should revert on second query attempt due to lack of funds (120ms)
     ✓ Should succeed on a second query attempt when sending funds (97ms)
-  5 passing (6s)
+   6 passing (6s)
 ```
 
 :white_check_mark: The more green . . .
