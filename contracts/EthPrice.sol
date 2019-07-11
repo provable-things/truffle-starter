@@ -1,6 +1,6 @@
-pragma solidity ^0.5.0;
+pragma solidity 0.5.0;
 
-import "./provable/provableAPI_0.5.sol";
+import "./provableAPI.sol";
 
 contract EthPrice is usingProvable {
 
