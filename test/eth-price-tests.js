@@ -1,5 +1,6 @@
 const Web3 = require('web3')
-const { waitForEvent } = require('./utils')
+const { waitForEvent } = require('./util/Events');
+const exceptions = require ("./util/Exceptions");
 const ethPriceContract = artifacts.require('./EthPrice.sol')
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:9545'))
 
@@ -53,46 +54,44 @@ contract('Eth Price Tests', ([ owner ]) => {
     )
   })
 
-  it('Should set ETH price correctly in contract', async () => {
-    const ethPriceInStorage = await contractMethods
-      .ethPriceCents()
-      .call()
-    assert.equal(
-      ethPriceInStorage,
-      ethPriceFromContractEvent,
-      'Contract\'s ETH price not set correctly!'
-    )
-  })
+    it('Should set ETH price correctly in contract', async () => {
+        const ethPriceInStorage = (await contractMethods.ethPriceCents().call()).toNumber();
+        assert.equal(
+            ethPriceInStorage,
+            ethPriceFromContractEvent,
+            'Contract\'s ETH price not set correctly!'
+        )
+    });
 
-  it('Should revert on second query attempt due to lack of funds', async () => {
-    const contractBalance = await web3.eth.getBalance(contractAddress)
-    assert(!parseInt(contractBalance))
-    const expectedError = 'revert'
-    try {
-      await contractMethods
-        .fetchEthPriveViaProvable()
-        .send({
-          from: owner,
-          gas: GAS_LIMIT
-        })
-      assert.fail('Update transaction should not have succeeded!')
-    } catch (e) {
-      assert.isTrue(
-        e.message.includes(expectedError),
-        `Expected ${expectedError} but got ${e.message} instead!`
-      )
-    }
-  })
+    it('Should revert on second query attempt due to lack of funds', async () => {
+        const contractBalance = await web3.eth.getBalance(contractAddress);
+        assert(!parseInt(contractBalance));
+        await exceptions.catchRevert(
+            contractMethods
+                .fetchEthPriceViaProvable()
+                .send({ from: owner, gas: GAS_LIMIT }));
+    });
 
-  it('Should succeed on a second query attempt when sending funds', async () => {
-    const ETH_AMOUNT = 1e16
-    const { events } = await contractMethods
-      .fetchEthPriveViaProvable()
-      .send({
-        from: owner,
-        gas: GAS_LIMIT,
-        value: ETH_AMOUNT
-      })
-    assert(events[PROVABLE_QUERY_EVENT])
-  })
+    it('Should succeed on a second query attempt when sending funds', async () => {
+        const ETH_AMOUNT = 1e16;
+        contractMethods
+            .fetchEthPriceViaProvable()
+            .send({
+                from: owner,
+                gas: GAS_LIMIT,
+                value: ETH_AMOUNT
+            });
+
+        const {
+            returnValues: {
+                _description
+            }
+        } = await waitForEvent(contractEvents[PROVABLE_QUERY_EVENT]);
+
+        assert.strictEqual(
+            _description,
+            PROVABLE_QUERY_STRING,
+            'Provable query incorrectly logged!'
+        )
+    })
 })

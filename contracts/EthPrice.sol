@@ -12,10 +12,10 @@ contract EthPrice is usingProvable {
     constructor()
         public
     {
-        fetchEthPriveViaProvable();
+        fetchEthPriceViaProvable();
     }
 
-    function fetchEthPriveViaProvable()
+    function fetchEthPriceViaProvable()
         public
         payable
     {
