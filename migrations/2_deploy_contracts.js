@@ -1,8 +1,5 @@
-const contracts = [
-  artifacts.require('./EthPrice.sol'),
-  artifacts.require('./usingProvable')
-]
+const contracts = [ artifacts.require('./EthPrice.sol') ]
 
-module.exports = deployer =>
-  contracts.map(contract =>
-    deployer.deploy(contract))
+module.exports = _deployer =>
+  contracts.map(_contract =>
+    _deployer.deploy(_contract))
