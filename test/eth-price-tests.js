@@ -1,11 +1,10 @@
 const Web3 = require('web3')
-const { waitForEvent } = require('./util/Events');
-const exceptions = require ("./util/Exceptions");
+const { waitForEvent } = require('./utils')
 const ethPriceContract = artifacts.require('./EthPrice.sol')
-const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:9545'))
+const { expectRevert } = require('openzeppelin-test-helpers')
+const web3WithWebsockets = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:9545'))
 
 contract('Eth Price Tests', ([ owner ]) => {
-
   let contractEvents
   let contractMethods
   let contractAddress
@@ -16,14 +15,14 @@ contract('Eth Price Tests', ([ owner ]) => {
   const PROVABLE_QUERY_STRING = 'Provable query in-flight!'
 
   it('Should get contract instantiation for listening to events', async () => {
-    const { contract } = await ethPriceContract.deployed()
-    const { methods, events } = new web3.eth.Contract(
-      contract._jsonInterface,
-      contract._address
+    const { contract: deployedContract } = await ethPriceContract.deployed()
+    const { methods, events } = new web3WithWebsockets.eth.Contract(
+      deployedContract._jsonInterface,
+      deployedContract._address
     )
     contractEvents = events
     contractMethods = methods
-    contractAddress = contract._address
+    contractAddress = deployedContract._address
   })
 
   it('Should have logged a new Provable query on contract creation', async () => {
@@ -32,10 +31,8 @@ contract('Eth Price Tests', ([ owner ]) => {
         _description
       }
     } = await waitForEvent(contractEvents[PROVABLE_QUERY_EVENT])
-
-    assert.strictEqual(
-      _description,
-      PROVABLE_QUERY_STRING,
+    assert(
+      _description === PROVABLE_QUERY_STRING,
       'Provable query incorrectly logged!'
     )
   })
@@ -47,51 +44,52 @@ contract('Eth Price Tests', ([ owner ]) => {
       }
     } = await waitForEvent(contractEvents.LogNewEthPrice)
     ethPriceFromContractEvent = _priceInCents
-    assert.isAbove(
-      parseInt(_priceInCents),
-      0,
+    assert(
+      parseInt(_priceInCents) > 0,
       'A price should have been retrieved from Provable call!'
     )
   })
 
-    it('Should set ETH price correctly in contract', async () => {
-        const ethPriceInStorage = (await contractMethods.ethPriceCents().call()).toNumber();
-        assert.equal(
-            ethPriceInStorage,
-            ethPriceFromContractEvent,
-            'Contract\'s ETH price not set correctly!'
-        )
-    });
+  it('Should set ETH price correctly in contract', async () => {
+    const ethPriceInStorage = await contractMethods
+      .ethPriceCents()
+      .call()
+    assert(
+      ethPriceInStorage === ethPriceFromContractEvent,
+      'Contract\'s ETH price not set correctly!'
+    )
+  })
 
-    it('Should revert on second query attempt due to lack of funds', async () => {
-        const contractBalance = await web3.eth.getBalance(contractAddress);
-        assert(!parseInt(contractBalance));
-        await exceptions.catchRevert(
-            contractMethods
-                .fetchEthPriceViaProvable()
-                .send({ from: owner, gas: GAS_LIMIT }));
-    });
+  it('Should revert on second query attempt due to lack of funds', async () => {
+    const contractBalance = await web3.eth.getBalance(contractAddress)
+    assert(parseInt(contractBalance) === 0)
+    await expectRevert.unspecified(
+      contractMethods
+        .fetchEthPriceViaProvable()
+        .send({
+          from: owner,
+          gas: GAS_LIMIT
+        })
+    )
+  })
 
-    it('Should succeed on a second query attempt when sending funds', async () => {
-        const ETH_AMOUNT = 1e16;
-        contractMethods
-            .fetchEthPriceViaProvable()
-            .send({
-                from: owner,
-                gas: GAS_LIMIT,
-                value: ETH_AMOUNT
-            });
-
-        const {
-            returnValues: {
-                _description
-            }
-        } = await waitForEvent(contractEvents[PROVABLE_QUERY_EVENT]);
-
-        assert.strictEqual(
-            _description,
-            PROVABLE_QUERY_STRING,
-            'Provable query incorrectly logged!'
-        )
-    })
+  it('Should succeed on a second query attempt when sending funds', async () => {
+    const ETH_AMOUNT = 1e16
+    contractMethods
+      .fetchEthPriceViaProvable()
+      .send({
+        from: owner,
+        gas: GAS_LIMIT,
+        value: ETH_AMOUNT
+      })
+    const {
+      returnValues: {
+        _description
+      }
+    } = await waitForEvent(contractEvents[PROVABLE_QUERY_EVENT])
+    assert(
+      _description === PROVABLE_QUERY_STRING,
+      'Provable query incorrectly logged!'
+    )
+  })
 })
