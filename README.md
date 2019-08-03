@@ -12,21 +12,17 @@ The Provable Truffle box is here! We have created this starter-box to show you h
 
 ### :page_with_curl: __Instructions For Unboxing__
 
-**1)** Using your favourite shell, first install Truffle globally:
-
-_**`❍ npm install -g truffle`**_
-
-**2)** Then create a directory you want to install the box into:
+**1)** Using your favourite shell, create a directory you want to install the box into:
 
 _**`❍ mkdir my-awesome-provable-truffle-box`**_
 
-**3)** Enter the directory:
+**2)** Enter the directory:
 
 _**`❍ cd my-awesome-provable-truffle-box`**_
 
-**4)** Unbox it!
+**3)** Unbox it!
 
-_**`❍ truffle unbox provable-things/truffle-starter`**_
+_**`❍ npx truffle unbox provable-things/truffle-starter`**_
 
 Now is a great time to have a look around the your new Provable box. You'll see all the Truffle files & folder structure you're used to. Congratulations - you can now compile, migrate and deploy your contracts to your heart's content!
 
@@ -44,7 +40,7 @@ To help even more, we've written a script in the *`package.json`* that came insi
 
 **1)** Point your console to your project's directory then start Truffle in develop mode by running:
 
-_**`❍ truffle develop`**_
+_**`❍ npx truffle develop`**_
 
 **2)** Once Truffle is fired up, in a __*new*__ console, create the bridge via:
 
