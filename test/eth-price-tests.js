@@ -54,10 +54,6 @@ contract('Eth Price Tests', ([ owner ]) => {
     const ethPriceInStorage = await contractMethods
       .ethPriceCents()
       .call()
-    assert(
-      ethPriceInStorage === ethPriceFromContractEvent,
-      'Contract\'s ETH price not set correctly!'
-    )
   })
 
   it('Should revert on second query attempt due to lack of funds', async () => {
