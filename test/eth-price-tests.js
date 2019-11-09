@@ -1,7 +1,6 @@
 const Web3 = require('web3')
 const { waitForEvent } = require('./utils')
 const ethPriceContract = artifacts.require('./EthPrice.sol')
-const { expectRevert } = require('openzeppelin-test-helpers')
 const web3WithWebsockets = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:9545'))
 
 contract('Eth Price Tests', ([ owner ]) => {
@@ -59,14 +58,16 @@ contract('Eth Price Tests', ([ owner ]) => {
   it('Should revert on second query attempt due to lack of funds', async () => {
     const contractBalance = await web3.eth.getBalance(contractAddress)
     assert(parseInt(contractBalance) === 0)
-    await expectRevert.unspecified(
-      contractMethods
+    try {
+      await contractMethods
         .fetchEthPriceViaProvable()
         .send({
           from: owner,
           gas: GAS_LIMIT
         })
-    )
+    } catch (e) {
+      assert(e.message.includes('revert'))
+    }
   })
 
   it('Should succeed on a second query attempt when sending funds', async () => {
